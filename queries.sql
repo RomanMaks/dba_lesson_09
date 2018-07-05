@@ -3,6 +3,20 @@
 --    вес (weight) и так далее, что вам придет в голову. Заполните
 --    это поле различными характеристиками в виде json.
 
+  ALTER TABLE products ADD characteristic jsonb NULL;
+
+  update products
+  SET characteristic = '{"color": "red", "size": "40", "gender": "female"}'
+  WHERE id = 1 -- Кеды
+
+  update products
+  SET characteristic = '{"color": "green", "weight": "400"}'
+  WHERE id = 5 -- Кружка
+
+  update products
+  SET characteristic = '{"color": "blue", "size": "XXL", "gender": "male"}'
+  WHERE id = 14 -- Джинсы
+
 -- 2. Найдите товары:
 
   -- 1. У которых есть характеристика цвет, но нет размера
