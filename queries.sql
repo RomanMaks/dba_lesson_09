@@ -17,13 +17,28 @@
   SET characteristic = '{"color": "blue", "size": "XXL", "gender": "male"}'
   WHERE id = 14 -- Джинсы
 
+  update products
+  SET characteristic = '{"color": "red", "size": "XXL", "weight": "1300", "gender": "male"}'
+  WHERE id = 11 -- Куртка
+
 -- 2. Найдите товары:
 
   -- 1. У которых есть характеристика цвет, но нет размера
+    SELECT products.characteristic
+    FROM products
+    WHERE characteristic ? 'color'
+      AND NOT characteristic ? 'size'
 
   -- 2. У которых вес не более килограмма
+    SELECT *
+    FROM products
+    WHERE (characteristic->>'weight')::integer <= 1000
 
   -- 3. Красного цвета и размера XXL
+    SELECT *
+    FROM products
+    WHERE characteristic->>'color' = 'red' 
+      AND characteristic->>'size' = 'XXL'
 
 -- 3. Создайте материализированное представление, которое поля jsonb
 --    превратит в столбцы (color, size, weight)
