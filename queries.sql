@@ -59,3 +59,10 @@
 --    У вас 4 красных майки по 100 рублей и 3 красных кепки по 200 рублей.
 --    Всего красных товаров на 1000 рублей. Из них майки - это 40%, а 
 --    кепки - 60%
+  SELECT
+    name,
+    price,
+    properties->>'color' AS color,
+    ((price * 100) / SUM(price)
+      OVER (PARTITION BY properties->>'color'))::NUMERIC(5, 2) AS share_of
+  FROM products
