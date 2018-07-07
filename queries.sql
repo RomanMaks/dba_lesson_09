@@ -61,7 +61,7 @@
 --    кепки - 60%
   SELECT
     name,
-    price,
+    price, -- NUMERIC(15, 2)
     properties->>'color' AS color,
     ((price * 100) / SUM(price)
       OVER (PARTITION BY properties->>'color'))::NUMERIC(5, 2) AS share_of
